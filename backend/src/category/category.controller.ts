@@ -6,12 +6,8 @@ import {
   Patch,
   Param,
   Delete,
-  HttpException,
-  HttpStatus,
-  NotFoundException,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CategoryDto } from './dto/Category.dto';
 import {
   ApiBody,
   ApiOperation,
@@ -19,6 +15,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { CategoryResponseDto } from './dto/category-response.dto';
+import { CategoryDto } from './dto/category-cud.dto';
 
 @ApiTags('Categories')
 @Controller('category')
@@ -36,7 +34,7 @@ export class CategoryController {
     description: 'Category with this name already exists',
   })
   @Post()
-  async create(@Body() createCategoryDto: CategoryDto) {
+  create(@Body() createCategoryDto: CategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
 
@@ -53,11 +51,15 @@ export class CategoryController {
     description: 'Enter category ID (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
-  @ApiResponse({ status: 200, description: 'Category found successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Category found successfully',
+    type: CategoryResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Category not found' })
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.categoryService.findUnique(id);
+  findOne(@Param('id') id: string) {
+    return this.categoryService.findUnique(id);
   }
 
   @ApiOperation({ summary: 'Update category' })
@@ -70,13 +72,14 @@ export class CategoryController {
     description: 'Enter category ID (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
-  @ApiResponse({ status: 201, description: 'Successfully updated category' })
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully updated category',
+    type: CategoryDto,
+  })
   @ApiResponse({ status: 404, description: 'Not found' })
   @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateCategoryDto: CategoryDto,
-  ) {
+  update(@Param('id') id: string, @Body() updateCategoryDto: CategoryDto) {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
@@ -89,7 +92,7 @@ export class CategoryController {
   @ApiResponse({ status: 200, description: 'Successfully deleted category' })
   @ApiResponse({ status: 404, description: 'Not found' })
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  remove(@Param('id') id: string) {
     return this.categoryService.remove(id);
   }
 }

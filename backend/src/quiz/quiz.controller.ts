@@ -16,9 +16,7 @@ export class QuizController {
   constructor(private readonly quizService: QuizService) {}
 
   @Post()
-  create(@Body() createQuizDto: CreateQuizDto) {
-    //
-  }
+  create(@Body() createQuizDto: CreateQuizDto) {}
 
   @Get()
   findAll() {

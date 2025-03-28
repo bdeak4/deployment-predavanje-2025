@@ -32,6 +32,7 @@ model Category {
 model Quiz {
   id          String       @id @default(uuid())
   name        String
+  imgUrl      String       @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTavLwcbETwRocb6mx3QuvdRGAnsAYqsOCPBQ&s")
   categoryId  String
   category    Category     @relation(fields: [categoryId], references: [id])
   questions   Question[]
