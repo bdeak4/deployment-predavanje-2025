@@ -1,4 +1,14 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateQuizDto } from './create-quiz.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 
-export class UpdateQuizDto extends PartialType(CreateQuizDto) {}
+export class UpdateQuizDto {
+  @IsString()
+  @MinLength(3)
+  @ApiProperty({ example: 'World War I' })
+  name: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ example: 'https://yourImage.jpg' })
+  imgUrl: string;
+}

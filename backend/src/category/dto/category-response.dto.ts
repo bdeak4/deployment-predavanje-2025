@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { QuizResponseDto } from 'src/quiz/dto/response-quiz.dto';
 
 export class CategoryResponseDto {

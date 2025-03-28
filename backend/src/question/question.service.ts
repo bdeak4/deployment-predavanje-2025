@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuestionDto } from './dto/create-question.dto';
-import { UpdateQuestionDto } from './dto/update-question.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -19,7 +18,7 @@ export class QuestionService {
     return `This action returns a #${id} question`;
   }
 
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
+  update(id: number, updateQuestionDto: CreateQuestionDto) {
     return `This action updates a #${id} question`;
   }
 
