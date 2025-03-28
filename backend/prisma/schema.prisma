@@ -35,14 +35,14 @@ model Quiz {
   imgUrl      String       @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTavLwcbETwRocb6mx3QuvdRGAnsAYqsOCPBQ&s")
   categoryId  String
   category    Category     @relation(fields: [categoryId], references: [id])
-  questions   Question[]
+  questions   Question[]   @relation("QuizToQuestion")
   quizResults QuizResult[]
 }
 
 model Question {
   id      String       @id @default(uuid())
   quizId  String
-  quiz    Quiz         @relation(fields: [quizId], references: [id])
+  quiz    Quiz         @relation("QuizToQuestion", fields: [quizId], references: [id], onDelete: Cascade)
   text    String
   type    QuestionType
   options String[]
