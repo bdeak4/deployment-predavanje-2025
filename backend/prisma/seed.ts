@@ -113,12 +113,22 @@ async function main() {
       username: 'mate',
       email: 'mate@gmail.com',
       password: await hashPassword('test123'),
+      points: 175,
       quizResults: {
         create: [
           { quizId: scienceQuiz.id, score: 85 },
           { quizId: historyQuiz.id, score: 90 },
         ],
       },
+    },
+  });
+
+  const admin = await prisma.user.create({
+    data: {
+      username: 'admin',
+      email: 'admin@admin.com',
+      password: await hashPassword('admin123'),
+      isAdmin: true,
     },
   });
 

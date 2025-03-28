@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuizDto } from './dto/create-quiz.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class QuizService {
-  create(createQuizDto: CreateQuizDto) {
-    return 'This action adds a new quiz';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async searchQuizzesByName(name: string) {
+    if (!name) return [];
+
+    return this.prisma.quiz.findMany({ where: { name: name } });
   }
 
-  findAll() {
-    return `This action returns all quiz`;
+  async findAll() {
+    return await this.prisma.quiz.findMany({
+      include: {
+        questions: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} quiz`;
-  }
-
-  update(id: number, updateQuizDto: UpdateQuizDto) {
-    return `This action updates a #${id} quiz`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} quiz`;
+  async findOne(id: string) {
+    return await this.prisma.quiz.findUnique({
+      where: { id: id },
+      include: {
+        questions: true,
+      },
+    });
   }
 }
