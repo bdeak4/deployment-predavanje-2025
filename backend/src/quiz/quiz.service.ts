@@ -33,6 +33,22 @@ export class QuizService {
     return this.prisma.quiz.findMany({ where: { name: name } });
   }
 
+  async findQuizzesByPartialName(name: string) {
+    return this.prisma.quiz.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+      include: {
+        questions: true,
+        quizResults: true,
+        category: true,
+      },
+    });
+  }
+
   async findAll() {
     const quizzes = await this.prisma.quiz.findMany({
       include: {

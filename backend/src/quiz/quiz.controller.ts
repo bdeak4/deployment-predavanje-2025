@@ -69,6 +69,27 @@ export class QuizController {
     return this.quizService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Get quizzes by name' })
+  @ApiParam({
+    name: 'name',
+    description: 'Enter quiz partial name',
+    example: 'World',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Quizzes found successfully',
+    type: QuizResponseDto,
+    isArray: true,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Not found',
+  })
+  @Get('name/:name')
+  findByPartialName(@Param('name') name: string) {
+    return this.quizService.findQuizzesByPartialName(name);
+  }
+
   @ApiOperation({ summary: 'Update quiz by ID' })
   @ApiBody({
     description: 'Quiz data to update a category',
