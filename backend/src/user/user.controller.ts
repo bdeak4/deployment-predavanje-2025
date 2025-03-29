@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreateUserResponseDto } from './dto/create-user-response.dto';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('user')
 export class UserController {
@@ -37,7 +38,12 @@ export class UserController {
   }
 
   @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, description: 'Users found successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Users found successfully',
+    type: UserResponseDto,
+    isArray: true,
+  })
   @Get()
   findAll() {
     return this.userService.findAll();
@@ -52,7 +58,7 @@ export class UserController {
   @ApiResponse({
     status: 200,
     description: 'User found successfully',
-    type: CreateUserResponseDto,
+    type: UserResponseDto,
   })
   @ApiResponse({
     status: 404,

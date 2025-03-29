@@ -17,6 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { CategoryResponseDto } from './dto/category-response.dto';
 import { CategoryDto } from './dto/category-cud.dto';
+import { CategoryCudResponseDto } from './dto/category-cud-response.dto';
 
 @ApiTags('Categories')
 @Controller('category')
@@ -28,7 +29,11 @@ export class CategoryController {
     description: 'Category data to create a new category',
     type: CategoryDto,
   })
-  @ApiResponse({ status: 201, description: 'Successfully created category' })
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully created category',
+    type: CategoryCudResponseDto,
+  })
   @ApiResponse({
     status: 409,
     description: 'Category with this name already exists',
@@ -39,7 +44,12 @@ export class CategoryController {
   }
 
   @ApiOperation({ summary: 'Get all categories' })
-  @ApiResponse({ status: 200, description: 'Categories found successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Categories found successfully',
+    type: CategoryResponseDto,
+    isArray: true,
+  })
   @Get()
   findAll() {
     return this.categoryService.findAll();
@@ -75,7 +85,7 @@ export class CategoryController {
   @ApiResponse({
     status: 201,
     description: 'Successfully updated category',
-    type: CategoryDto,
+    type: CategoryCudResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Not found' })
   @Patch(':id')
@@ -89,7 +99,11 @@ export class CategoryController {
     description: 'Enter category ID (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
-  @ApiResponse({ status: 200, description: 'Successfully deleted category' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully deleted category',
+    type: CategoryCudResponseDto,
+  })
   @ApiResponse({ status: 404, description: 'Not found' })
   @Delete(':id')
   remove(@Param('id') id: string) {

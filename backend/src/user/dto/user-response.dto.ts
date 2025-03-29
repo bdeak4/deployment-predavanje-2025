@@ -11,6 +11,12 @@ export class UserResponseDto {
   @ApiProperty({ example: 'mate@mate.com' })
   email: string;
 
+  @ApiProperty({ example: 'test1' })
+  password: string;
+
+  @ApiProperty({ example: false })
+  isAdmin: boolean;
+
   @ApiProperty({ example: 100 })
   points: number;
 

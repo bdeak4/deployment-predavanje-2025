@@ -37,7 +37,12 @@ export class QuestionController {
   }
 
   @ApiOperation({ summary: 'Get all questions' })
-  @ApiResponse({ status: 200, description: 'Questions found successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Questions found successfully',
+    type: QuestionResponseDto,
+    isArray: true,
+  })
   @Get()
   findAll() {
     return this.questionService.findAll();

@@ -37,7 +37,12 @@ export class QuizResultController {
   }
 
   @ApiOperation({ summary: 'Get all quiz results' })
-  @ApiResponse({ status: 200, description: 'Results found successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Results found successfully',
+    type: QuizResultResponseDto,
+    isArray: true,
+  })
   @Get()
   findAll() {
     return this.quizResultService.findAll();
