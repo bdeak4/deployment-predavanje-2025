@@ -21,6 +21,10 @@ export class QuizResultService {
   async create(createQuizResultDto: CreateQuizResultDto) {
     await this.quizService.findOne(createQuizResultDto.quizId);
     await this.userService.findOne(createQuizResultDto.userId);
+    await this.userService.updatePoints(
+      createQuizResultDto.userId,
+      createQuizResultDto.score,
+    );
 
     return this.prisma.quizResult.create({ data: createQuizResultDto });
   }
