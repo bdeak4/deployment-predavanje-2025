@@ -48,6 +48,17 @@ export class UserService {
     return user;
   }
 
+  async updatePoints(userId: string, pointsDelta: number) {
+    return await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        points: {
+          increment: pointsDelta,
+        },
+      },
+    });
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     await this.findOne(id);
     await this.isEmailAndUsernameUnique(updateUserDto);

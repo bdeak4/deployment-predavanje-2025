@@ -11,7 +11,6 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { UserResponseDto } from './dto/user-response.dto';
 import { CreateUserResponseDto } from './dto/create-user-response.dto';
 
 @Controller('user')
