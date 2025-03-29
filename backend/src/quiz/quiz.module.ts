@@ -7,5 +7,6 @@ import { CategoryService } from 'src/category/category.service';
 @Module({
   controllers: [QuizController],
   providers: [QuizService, PrismaService, CategoryService],
+  exports: [QuizService],
 })
 export class QuizModule {}

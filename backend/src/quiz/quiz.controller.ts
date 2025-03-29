@@ -47,13 +47,17 @@ export class QuizController {
   @ApiOperation({ summary: 'Get unique quiz by ID' })
   @ApiParam({
     name: 'id',
-    description: 'Enter category ID (UUID)',
+    description: 'Enter quiz ID (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
   @ApiResponse({
     status: 200,
     description: 'Quiz found successfully',
     type: QuizResponseDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Not found',
   })
   @Get(':id')
   findOne(@Param('id') id: string) {

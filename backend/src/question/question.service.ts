@@ -1,28 +1,52 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { QuizService } from 'src/quiz/quiz.service';
+import { UpdateQuizDto } from 'src/quiz/dto/update-quiz.dto';
+import { UpdateQuestionDto } from './dto/update-question.dto';
 
 @Injectable()
 export class QuestionService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly quizService: QuizService,
+  ) {}
 
-  create(createQuestionDto: CreateQuestionDto) {
-    return 'This action adds a new question';
+  async create(createQuestionDto: CreateQuestionDto) {
+    await this.quizService.findOne(createQuestionDto.quizId);
+
+    return await this.prisma.question.create({ data: createQuestionDto });
   }
 
-  findAll() {
-    return `This action returns all question`;
+  async findAll() {
+    return await this.prisma.question.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
+  async findOne(id: string) {
+    const question = await this.prisma.question.findUnique({
+      where: { id: id },
+    });
+
+    if (!question) {
+      throw new NotFoundException('Question with this id was not found.');
+    }
+    return question;
   }
 
-  update(id: number, updateQuestionDto: CreateQuestionDto) {
-    return `This action updates a #${id} question`;
+  async update(id: string, updateQuestionDto: UpdateQuestionDto) {
+    await this.findOne(id);
+
+    return await this.prisma.question.update({
+      where: { id: id },
+      data: updateQuestionDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} question`;
+  async remove(id: string) {
+    await this.findOne(id);
+
+    return await this.prisma.question.delete({
+      where: { id: id },
+    });
   }
 }
