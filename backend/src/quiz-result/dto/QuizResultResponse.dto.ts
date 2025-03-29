@@ -10,6 +10,6 @@ export class QuizResultResponseDto {
   @ApiProperty({ example: '60633ffd-7486-4d83-ab21-879c599bec03' })
   quizId: string;
 
-  @ApiProperty({ example: 10 })
+  @ApiProperty({ example: 100 })
   score: number;
 }
