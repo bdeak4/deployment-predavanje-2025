@@ -14,8 +14,8 @@ export class UserResponseDto {
   @ApiProperty({ example: 'test1' })
   password: string;
 
-  @ApiProperty({ example: false })
-  isAdmin: boolean;
+  @ApiProperty({ example: 'User' })
+  role: string;
 
   @ApiProperty({ example: 100 })
   points: number;

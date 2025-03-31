@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -15,6 +16,18 @@ export class UserService {
     await this.isEmailAndUsernameUnique(createUserDto);
 
     return await this.prisma.user.create({ data: createUserDto });
+  }
+
+  async findByEmailOrUsername(prompt: string) {
+    const user = await this.prisma.user.findFirst({
+      where: { OR: [{ email: prompt }, { username: prompt }] },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or username');
+    }
+
+    return user;
   }
 
   async isEmailAndUsernameUnique(createUserDto: CreateUserDto | UpdateUserDto) {

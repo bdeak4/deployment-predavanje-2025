@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import {
@@ -18,12 +19,17 @@ import {
 import { CategoryResponseDto } from './dto/category-response.dto';
 import { CategoryDto } from './dto/category-cud.dto';
 import { CategoryCudResponseDto } from './dto/category-cud-response.dto';
+import { Roles } from 'src/auth/guard/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guard/roles.guard';
 
 @ApiTags('Categories')
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin')
   @ApiOperation({ summary: 'Create category (only admin)' })
   @ApiBody({
     description: 'Category data to create a new category',
@@ -72,6 +78,8 @@ export class CategoryController {
     return this.categoryService.findUnique(id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin')
   @ApiOperation({ summary: 'Update category' })
   @ApiBody({
     description: 'Category data to update a category',
@@ -93,6 +101,8 @@ export class CategoryController {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin')
   @ApiOperation({ summary: 'Delete category by ID' })
   @ApiParam({
     name: 'id',

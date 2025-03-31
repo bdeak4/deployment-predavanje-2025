@@ -18,7 +18,7 @@ model User {
   username    String       @unique
   email       String       @unique
   password    String
-  isAdmin     Boolean      @default(false)
+  role        Role         @default(User)
   points      Int          @default(0)
   quizResults QuizResult[]
 }
@@ -62,4 +62,9 @@ enum QuestionType {
   MULTIPLE_CHOICE
   TRUE_FALSE
   SHORT_ANSWER
+}
+
+enum Role {
+  Admin
+  User
 }

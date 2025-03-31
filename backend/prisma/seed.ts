@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { hashPassword } from '../src/utils/handleHashing';
+import { Role } from 'src/enums/Role';
 
 const prisma = new PrismaClient();
 
@@ -128,7 +129,7 @@ async function main() {
       username: 'admin',
       email: 'admin@admin.com',
       password: await hashPassword('admin123'),
-      isAdmin: true,
+      role: 'Admin',
     },
   });
 
