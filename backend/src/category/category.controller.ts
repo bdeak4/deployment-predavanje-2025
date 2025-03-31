@@ -44,6 +44,10 @@ export class CategoryController {
     status: 409,
     description: 'Category with this name already exists',
   })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
   @Post()
   create(@Body() createCategoryDto: CategoryDto) {
     return this.categoryService.create(createCategoryDto);
@@ -96,6 +100,10 @@ export class CategoryController {
     type: CategoryCudResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Not found' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoryDto: CategoryDto) {
     return this.categoryService.update(id, updateCategoryDto);
@@ -115,6 +123,10 @@ export class CategoryController {
     type: CategoryCudResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Not found' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoryService.remove(id);
