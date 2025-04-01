@@ -1,5 +1,30 @@
+@import "./styles/fonts.css";
+@import "./styles/colors.css";
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  background-color: var(--white-background);
+}
+
+.container {
+  max-width: 1200px;
+  padding-inline: 2rem;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Montserrat";
+  line-height: 1.2;
 }
