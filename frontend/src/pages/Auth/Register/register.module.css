@@ -1,13 +1,13 @@
-.loginContainer {
+.registerContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 30px;
   height: 100vh;
 }
 
-.loginWrapper {
+.registerWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,18 +34,18 @@
   width: 100%;
 }
 
-.register {
+.login {
   text-align: center;
   margin-top: 1.5rem;
   color: #666;
 }
 
-.registerLink {
+.loginLink {
   color: var(--blue);
   text-decoration: none;
   margin-left: 0.5rem;
 }
 
-.registerLink:hover {
+.loginLink:hover {
   text-decoration: underline;
 }

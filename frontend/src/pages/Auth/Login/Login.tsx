@@ -3,6 +3,9 @@ import c from "./login.module.css";
 import { Link, useNavigate } from "react-router";
 import { login } from "@/services/AuthService/authService";
 import { paths } from "@/router/paths";
+import { InputField } from "@/components";
+import { SubmitBtn } from "@/components/SubmitButton/SubmitBtn";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Login = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -12,20 +15,37 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  const validateInputs = (): boolean => {
+    if (prompt.length < 3) {
+      setError("Username must have at least 3 characters");
+      return false;
+    }
+    if (password.length < 5) {
+      setError("Password must have at least 5 characters");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const errorMessage = validateInputs();
+
+    if (!errorMessage) {
+      return;
+    }
+
     setLoading(true);
     setError("");
 
     try {
       const data = await login(prompt, password);
 
-      console.log("Login successful:", data);
-
       if (data.access_token) {
-        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("token", data.access_token);
       }
-
+      toast.success("Successfully logged in");
       navigate(paths.quizzes);
     } catch (err: any) {
       setError("Invalid credentials, try again.");
@@ -41,43 +61,31 @@ export const Login = () => {
         <form className={c.form} onSubmit={handleSubmit}>
           <h2 className={c.title}>Log in</h2>
 
+          <InputField
+            label="Username or email"
+            type="text"
+            placeholder="Enter username or mail"
+            onChange={setPrompt}
+            value={prompt}
+          />
+
+          <InputField
+            label="Password"
+            type="password"
+            placeholder="Enter password"
+            onChange={setPassword}
+            value={password}
+          />
+
           {error && <div className={c.errorMessage}>{error}</div>}
 
-          <div className={c.formGroup}>
-            <label htmlFor="username" className={c.label}>
-              Username or email
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className={c.input}
-              placeholder="Enter email or username"
-              onChange={(e) => setPrompt(e.target.value)}
-              value={prompt}
-              required
-            />
-          </div>
+          <SubmitBtn
+            text="Log in"
+            loadingText="Logging in..."
+            loading={loading}
+          />
 
-          <div className={c.formGroup}>
-            <label htmlFor="password" className={c.label}>
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className={c.input}
-              placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-          </div>
-
-          <button type="submit" className={c.button} disabled={loading}>
-            {loading ? "Logging in..." : "Log in"}
-          </button>
+          <Toaster />
 
           <div className={c.register}>
             You don't have an account?
