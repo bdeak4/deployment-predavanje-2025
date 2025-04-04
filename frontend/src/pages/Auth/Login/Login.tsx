@@ -6,8 +6,11 @@ import { paths } from "@/router/paths";
 import { InputField } from "@/components";
 import { SubmitBtn } from "@/components/SubmitButton/SubmitBtn";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "@/contexts";
 
 export const Login = () => {
+  const { loginToken } = useAuth();
+
   const [prompt, setPrompt] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,10 +46,10 @@ export const Login = () => {
       const data = await login(prompt, password);
 
       if (data.access_token) {
-        localStorage.setItem("token", data.access_token);
+        loginToken(data.access_token);
       }
       toast.success("Successfully logged in");
-      navigate(paths.quizzes);
+      navigate(paths.home);
     } catch (err: any) {
       setError("Invalid credentials, try again.");
     } finally {

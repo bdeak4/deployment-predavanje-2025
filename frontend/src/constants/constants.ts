@@ -5,4 +5,7 @@ export const API_ENDPOINTS = {
     LOGIN: `${API_BASE_URL}/auth/login`,
     REGISTER: `${API_BASE_URL}/auth/register`,
   },
+  QUIZ: {
+    ALL_QUIZZES: `${API_BASE_URL}/quiz`,
+  },
 };
