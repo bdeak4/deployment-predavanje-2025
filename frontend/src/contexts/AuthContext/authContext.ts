@@ -1,8 +1,9 @@
+import { JwtPayload } from "@/utils/decodeUser";
 import { createContext } from "react";
 
 type AuthContextType = {
-  isAuthenticated: boolean;
-  loginToken: (token: string) => void;
+  user: JwtPayload | null;
+  login: (token: string) => void;
   logout: () => void;
 };
 

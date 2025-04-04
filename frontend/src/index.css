@@ -28,3 +28,11 @@ h5 {
   font-family: "Montserrat";
   line-height: 1.2;
 }
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+}

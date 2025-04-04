@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useLocation, useRoutes } from "react-router";
 import { paths } from "./paths";
 import { QuizzesPage } from "@/pages/Quizzes";
+import { SinglePageQuiz } from "@/pages/SingleQuizPage";
 
 export default function Router() {
   const location = useLocation();
@@ -21,6 +22,10 @@ export default function Router() {
         {
           element: <QuizzesPage />,
           index: true,
+        },
+        {
+          path: "quiz/:id",
+          element: <SinglePageQuiz />,
         },
       ],
     },

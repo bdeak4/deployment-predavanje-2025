@@ -1,7 +1,8 @@
 import { API_ENDPOINTS } from "@/constants/constants";
+import { Quiz } from "@/types/Quiz";
 import axios from "axios";
 
-export const fetchAllQuizzes = async () => {
+export const fetchAllQuizzes = async (): Promise<Quiz[]> => {
   try {
     const response = await axios.get(API_ENDPOINTS.QUIZ.ALL_QUIZZES);
     if (response.status !== 200) {

@@ -1,20 +1,20 @@
 import { useState } from "react";
 import c from "./login.module.css";
 import { Link, useNavigate } from "react-router";
-import { login } from "@/services/AuthService/authService";
 import { paths } from "@/router/paths";
 import { InputField } from "@/components";
 import { SubmitBtn } from "@/components/SubmitButton/SubmitBtn";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "@/contexts";
+import { loginService } from "@/services/AuthService/authService";
 
 export const Login = () => {
-  const { loginToken } = useAuth();
-
   const [prompt, setPrompt] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -43,13 +43,16 @@ export const Login = () => {
     setError("");
 
     try {
-      const data = await login(prompt, password);
+      if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+      }
+      const data = await loginService(prompt, password);
 
       if (data.access_token) {
-        loginToken(data.access_token);
+        login(data.access_token);
+        toast.success("Successfully logged in");
+        navigate(paths.home);
       }
-      toast.success("Successfully logged in");
-      navigate(paths.home);
     } catch (err: any) {
       setError("Invalid credentials, try again.");
     } finally {
