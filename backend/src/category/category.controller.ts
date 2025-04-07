@@ -27,7 +27,7 @@ import { UserGuard } from 'src/auth/guard/user.guard';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @UseGuards(UserGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create category (only admin)' })
   @ApiBody({
     description: 'Category data to create a new category',
@@ -80,7 +80,7 @@ export class CategoryController {
     return this.categoryService.findUnique(id);
   }
 
-  @UseGuards(UserGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update category' })
   @ApiBody({
     description: 'Category data to update a category',

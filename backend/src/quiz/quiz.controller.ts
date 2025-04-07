@@ -41,7 +41,6 @@ export class QuizController {
     return this.quizService.create(createQuizDto);
   }
 
-  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get all quizzes' })
   @ApiResponse({
     status: 200,
@@ -54,6 +53,7 @@ export class QuizController {
     return this.quizService.findAll();
   }
 
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get unique quiz by ID' })
   @ApiParam({
     name: 'id',
@@ -74,6 +74,7 @@ export class QuizController {
     return this.quizService.findOne(id);
   }
 
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get quizzes by name' })
   @ApiParam({
     name: 'name',
@@ -95,6 +96,7 @@ export class QuizController {
     return this.quizService.findQuizzesByPartialName(name);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update quiz by ID' })
   @ApiBody({
     description: 'Quiz data to update a category',
@@ -116,6 +118,7 @@ export class QuizController {
     return this.quizService.update(id, updateQuizDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete quiz by ID' })
   @ApiParam({
     name: 'id',

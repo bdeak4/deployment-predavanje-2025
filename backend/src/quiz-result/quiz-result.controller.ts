@@ -6,17 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { QuizResultService } from './quiz-result.service';
 import { CreateQuizResultDto } from './dto/create-quiz-result.dto';
 import { UpdateQuizResultDto } from './dto/update-quiz-result.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { QuizResultResponseDto } from './dto/QuizResultResponse.dto';
+import { AdminGuard } from 'src/auth/guard/admin.guard';
+import { UserGuard } from 'src/auth/guard/user.guard';
 
 @Controller('quiz-result')
 export class QuizResultController {
   constructor(private readonly quizResultService: QuizResultService) {}
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create new quiz-result' })
   @ApiBody({
     description: 'Quiz-result data to create a new quiz-result',
@@ -48,6 +52,7 @@ export class QuizResultController {
     return this.quizResultService.findAll();
   }
 
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get unique quiz result by ID' })
   @ApiParam({
     name: 'id',
@@ -68,6 +73,7 @@ export class QuizResultController {
     return this.quizResultService.findOne(id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update quiz result by ID' })
   @ApiBody({
     description: 'Quiz result data to update',
@@ -92,6 +98,7 @@ export class QuizResultController {
     return this.quizResultService.update(id, updateQuizResultDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete quiz result by ID' })
   @ApiParam({
     name: 'id',

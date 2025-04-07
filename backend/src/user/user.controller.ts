@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -13,6 +14,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreateUserResponseDto } from './dto/create-user-response.dto';
 import { UserResponseDto } from './dto/user-response.dto';
+import { AdminGuard } from 'src/auth/guard/admin.guard';
+import { UserGuard } from 'src/auth/guard/user.guard';
 
 @Controller('user')
 export class UserController {
@@ -37,6 +40,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({
     status: 200,
@@ -49,6 +53,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get unique user by ID' })
   @ApiParam({
     name: 'id',
@@ -69,6 +74,7 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Update user by ID' })
   @ApiBody({
     description: 'User data to update a user',
@@ -90,6 +96,7 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete user by ID' })
   @ApiParam({
     name: 'id',
