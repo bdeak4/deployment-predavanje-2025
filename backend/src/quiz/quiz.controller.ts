@@ -14,16 +14,14 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { QuizCudResponseDto } from './dto/cud-response-quiz.dto';
 import { QuizResponseDto } from './dto/response-quiz.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guard/roles.guard';
-import { Roles } from 'src/auth/guard/roles.decorator';
+import { AdminGuard } from 'src/auth/guard/admin.guard';
+import { UserGuard } from 'src/auth/guard/user.guard';
 
 @Controller('quiz')
 export class QuizController {
   constructor(private readonly quizService: QuizService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('Admin')
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create new quiz' })
   @ApiBody({
     description: 'Quiz data to create a new quiz',
@@ -43,6 +41,7 @@ export class QuizController {
     return this.quizService.create(createQuizDto);
   }
 
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get all quizzes' })
   @ApiResponse({
     status: 200,

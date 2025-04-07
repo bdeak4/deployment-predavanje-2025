@@ -19,17 +19,15 @@ import {
 import { CategoryResponseDto } from './dto/category-response.dto';
 import { CategoryDto } from './dto/category-cud.dto';
 import { CategoryCudResponseDto } from './dto/category-cud-response.dto';
-import { Roles } from 'src/auth/guard/roles.decorator';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guard/roles.guard';
+import { AdminGuard } from 'src/auth/guard/admin.guard';
+import { UserGuard } from 'src/auth/guard/user.guard';
 
 @ApiTags('Categories')
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('Admin')
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Create category (only admin)' })
   @ApiBody({
     description: 'Category data to create a new category',
@@ -82,8 +80,7 @@ export class CategoryController {
     return this.categoryService.findUnique(id);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('Admin')
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Update category' })
   @ApiBody({
     description: 'Category data to update a category',
@@ -109,8 +106,7 @@ export class CategoryController {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('Admin')
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete category by ID' })
   @ApiParam({
     name: 'id',
