@@ -6,6 +6,7 @@ import { useLocation, useRoutes } from "react-router";
 import { paths } from "./paths";
 import { QuizzesPage } from "@/pages/Quizzes";
 import { SinglePageQuiz } from "@/pages/SingleQuizPage";
+import { PrivateRoute } from "@/contexts";
 
 export default function Router() {
   const location = useLocation();
@@ -24,8 +25,13 @@ export default function Router() {
           index: true,
         },
         {
-          path: "quiz/:id",
-          element: <SinglePageQuiz />,
+          element: <PrivateRoute />,
+          children: [
+            {
+              path: "quiz/:id",
+              element: <SinglePageQuiz />,
+            },
+          ],
         },
       ],
     },

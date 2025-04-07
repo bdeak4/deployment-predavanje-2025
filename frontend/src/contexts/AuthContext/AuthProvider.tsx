@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AuthContext } from "./authContext";
 import { getUserFromToken, JwtPayload } from "@/utils/decodeUser";
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<JwtPayload | null>(null);
 
@@ -8,7 +9,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const token = localStorage.getItem("token");
     if (token) {
       const userData = getUserFromToken(token);
-      setUser(userData);
+      if (userData) setUser(userData);
+      else logout();
     }
   }, []);
 

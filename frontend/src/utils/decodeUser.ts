@@ -6,9 +6,19 @@ export type JwtPayload = {
   username: string;
   email: string;
   role: Role;
+  exp: number;
 };
+export const getUserFromToken = (token: string): JwtPayload | null => {
+  try {
+    const decoded = jwtDecode<JwtPayload>(token);
+    const now = Date.now() / 1000;
 
-export const getUserFromToken = (token: string): JwtPayload => {
-  const decodedToken = jwtDecode<JwtPayload>(token);
-  return decodedToken;
+    if (decoded.exp && decoded.exp < now) {
+      return null;
+    }
+
+    return decoded;
+  } catch (error) {
+    return null;
+  }
 };

@@ -5,10 +5,29 @@ import c from "./quizzesPage.module.css";
 import { Quiz } from "@/types/Quiz";
 import { QuizCard } from "@/components";
 import { useAuth } from "@/contexts";
+import { useLocation } from "react-router";
+import { useEffect, useState } from "react";
 
 export function QuizzesPage() {
-  const { data, isLoading, error } = useFetch<Quiz[]>(fetchAllQuizzes);
   const { user } = useAuth();
+  const { search } = useLocation();
+  const [filteredData, setFilteredData] = useState<Quiz[]>([]);
+
+  const { data, isLoading, error } = useFetch<Quiz[]>(fetchAllQuizzes);
+
+  useEffect(() => {
+    if (data) {
+      const searchQuery = new URLSearchParams(search).get("search");
+      if (searchQuery) {
+        const filteredQuizzes = data.filter((quiz) =>
+          quiz.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredData(filteredQuizzes);
+      } else {
+        setFilteredData(data);
+      }
+    }
+  }, [data, search]);
 
   if (isLoading) {
     return (
@@ -20,7 +39,7 @@ export function QuizzesPage() {
 
   if (error) throw new Error(error);
 
-  if (!data || data.length === 0) {
+  if (!filteredData || filteredData.length === 0) {
     return (
       <div className="container">
         <p>No items found.</p>
@@ -32,7 +51,7 @@ export function QuizzesPage() {
     <div className={`container ${c.quizzesContainer}`}>
       <h1>Explore our quizzes: {user?.username}</h1>
       <div className={c.quizCardsWrapper}>
-        {data.map((quiz) => (
+        {filteredData.map((quiz) => (
           <QuizCard key={quiz.id} quiz={quiz} />
         ))}
       </div>

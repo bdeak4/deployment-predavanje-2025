@@ -7,5 +7,6 @@ export const API_ENDPOINTS = {
   },
   QUIZ: {
     ALL_QUIZZES: `${API_BASE_URL}/quiz`,
+    SEARCH: `${API_BASE_URL}/quiz/search`,
   },
 };

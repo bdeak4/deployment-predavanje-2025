@@ -16,9 +16,7 @@ export function QuizCard({ quiz }: QuizCardProps) {
     console.log(user);
     if (!user) {
       toast.error("You have to log in to participate in quiz");
-
       navigate(paths.login);
-
       return;
     }
     navigate(paths.quiz(id));

@@ -1,19 +1,24 @@
 import c from "./navbar.module.css";
 import { FormEvent, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export const Navbar = () => {
+  const [searchParam, setSearchParam] = useState<string>("");
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const searchParams = new URLSearchParams(location.search);
-
-  const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || ""
-  );
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchParam(e.target.value);
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (searchParam.trim()) {
+      navigate(`/?search=${searchParam}`);
+    } else {
+      toast.error("Please enter a search term.");
+    }
   };
 
   return (
@@ -24,12 +29,13 @@ export const Navbar = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchParam}
+          onChange={handleChange}
           placeholder="Search quizzes"
         />
         <button type="submit">Search</button>
       </form>
+      <Toaster />
     </nav>
   );
 };

@@ -34,7 +34,7 @@ export class QuizService {
   }
 
   async findQuizzesByPartialName(name: string) {
-    return this.prisma.quiz.findMany({
+    const quizzes = await this.prisma.quiz.findMany({
       where: {
         name: {
           contains: name,
@@ -47,6 +47,12 @@ export class QuizService {
         category: true,
       },
     });
+
+    if (quizzes.length === 0) {
+      throw new NotFoundException('No quizzes found with that name.');
+    }
+
+    return quizzes;
   }
 
   async findAll() {

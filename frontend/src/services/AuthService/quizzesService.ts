@@ -14,3 +14,20 @@ export const fetchAllQuizzes = async (): Promise<Quiz[]> => {
     throw error;
   }
 };
+
+export const fetchQuizzesBySearch = async (
+  searchQuery: string
+): Promise<Quiz[]> => {
+  try {
+    const response = await axios.get(
+      `${API_ENDPOINTS.QUIZ.SEARCH}?search=${searchQuery}`
+    );
+    if (response.status !== 200) {
+      throw new Error("Something went wrong while fetching quizzes");
+    }
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching quizzes:", error);
+    throw error;
+  }
+};

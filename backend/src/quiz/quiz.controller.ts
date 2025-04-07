@@ -7,10 +7,17 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { QuizService } from './quiz.service';
 import { CreateQuizDto } from './dto/create-quiz.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+} from '@nestjs/swagger';
 import { QuizCudResponseDto } from './dto/cud-response-quiz.dto';
 import { QuizResponseDto } from './dto/response-quiz.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
@@ -53,6 +60,29 @@ export class QuizController {
     return this.quizService.findAll();
   }
 
+  @ApiOperation({ summary: 'Get quizzes by name' })
+  @ApiQuery({
+    name: 'search',
+    example: 'war',
+    required: true,
+    description: 'Search term for quizzes',
+    type: String,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Quizzes found successfully',
+    type: QuizResponseDto,
+    isArray: true,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Not found',
+  })
+  @Get('search')
+  async findQuizzesByPartialName(@Query('search') name: string) {
+    return this.quizService.findQuizzesByPartialName(name);
+  }
+
   @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Get unique quiz by ID' })
   @ApiParam({
@@ -72,28 +102,6 @@ export class QuizController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.quizService.findOne(id);
-  }
-
-  @UseGuards(UserGuard)
-  @ApiOperation({ summary: 'Get quizzes by name' })
-  @ApiParam({
-    name: 'name',
-    description: 'Enter quiz partial name',
-    example: 'World',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Quizzes found successfully',
-    type: QuizResponseDto,
-    isArray: true,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Not found',
-  })
-  @Get('name/:name')
-  findByPartialName(@Param('name') name: string) {
-    return this.quizService.findQuizzesByPartialName(name);
   }
 
   @UseGuards(AdminGuard)
