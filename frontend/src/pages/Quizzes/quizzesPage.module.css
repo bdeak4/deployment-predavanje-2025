@@ -1,0 +1,25 @@
+.quizCardsWrapper {
+  margin-block: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.headerText {
+  margin-bottom: 2rem;
+}
+
+.headerText h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.headerText p {
+  font-size: 1.1rem;
+  color: var(--gray);
+  max-width: 700px;
+}
+
+.highlight {
+  color: var(--blue);
+}

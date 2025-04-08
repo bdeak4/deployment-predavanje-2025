@@ -23,7 +23,14 @@ export function QuizCard({ quiz }: QuizCardProps) {
   };
   return (
     <div className={c.quizCard} onClick={() => handleNavigateQuiz(quiz.id)}>
-      <p>{quiz.name}</p>
+      <div className={c.imgWrapper}>
+        <img src={quiz.imgUrl} alt="quiz image" />
+      </div>
+      <div className={c.quizInfo}>
+        <h3>{quiz.name}</h3>
+        <p>{quiz.category.name}</p>
+        <button className={c.startQuizBtn}>Start Quiz</button>
+      </div>
     </div>
   );
 }

@@ -49,7 +49,23 @@ export function QuizzesPage() {
 
   return (
     <div className={`container ${c.quizzesContainer}`}>
-      <h1>Explore our quizzes: {user?.username}</h1>
+      <div className={c.headerText}>
+        <h1>
+          {user ? (
+            <>
+              Welcome back,{" "}
+              <span className={c.highlight}>{user.username} 👋</span>
+            </>
+          ) : (
+            "Welcome to Dump Quiz!"
+          )}
+        </h1>
+        <p>
+          Test your knowledge and learn something new with our curated selection
+          of quizzes. Browse through various topics, pick what interests you,
+          and challenge yourself!
+        </p>
+      </div>
       <div className={c.quizCardsWrapper}>
         {filteredData.map((quiz) => (
           <QuizCard key={quiz.id} quiz={quiz} />
