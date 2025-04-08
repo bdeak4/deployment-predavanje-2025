@@ -23,3 +23,10 @@
 .highlight {
   color: var(--blue);
 }
+
+.noQuizzes {
+  display: inline-block;
+  border: 1px solid var(--blue);
+  padding: 10px;
+  border-radius: 8px;
+}

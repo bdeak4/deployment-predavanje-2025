@@ -3,7 +3,7 @@ import { SubmitBtn } from "@/components/SubmitButton/SubmitBtn";
 import c from "@/pages/Auth/Register/register.module.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { register } from "@/services/AuthService/authService";
+import { register } from "@/services/authService";
 import toast from "react-hot-toast";
 import { paths } from "@/router/paths";
 

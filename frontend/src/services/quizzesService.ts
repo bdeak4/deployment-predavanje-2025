@@ -10,7 +10,7 @@ export const fetchAllQuizzes = async (): Promise<Quiz[]> => {
     }
     return response.data;
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("Error fetching quizzes:", error);
     throw error;
   }
 };

@@ -6,7 +6,7 @@ import { InputField } from "@/components";
 import { SubmitBtn } from "@/components/SubmitButton/SubmitBtn";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "@/contexts";
-import { loginService } from "@/services/AuthService/authService";
+import { loginService } from "@/services/authService";
 
 export const Login = () => {
   const [prompt, setPrompt] = useState<string>("");

@@ -9,4 +9,7 @@ export const API_ENDPOINTS = {
     ALL_QUIZZES: `${API_BASE_URL}/quiz`,
     SEARCH: `${API_BASE_URL}/quiz/search`,
   },
+  CATEGORY: {
+    ALL_CATEGORIES: `${API_BASE_URL}/category`,
+  },
 };
