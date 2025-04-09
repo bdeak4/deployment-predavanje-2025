@@ -18,19 +18,37 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const validateInputs = () => {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+
+    if (!usernameRegex.test(username)) {
+      setError(
+        "Username must be a single word without spaces or special characters"
+      );
+      return false;
+    }
+
     if (username.length < 3) {
       setError("Username must have at least 3 characters");
       return false;
     }
+
+    if (!emailRegex.test(email)) {
+      setError("Email must be valid and contain only lowercase letters");
+      return false;
+    }
+
     if (password.length < 5) {
       setError("Password must have at least 5 characters");
       return false;
     }
+
     if (password !== repeatPassword) {
       setError("Your re-entered password doesn't match");
       return false;
     }
 
+    setError("");
     return true;
   };
 
@@ -79,7 +97,7 @@ export const Register = () => {
           <InputField
             label="Email"
             type="email"
-            placeholder="Enter your username"
+            placeholder="Enter your email"
             onChange={setEmail}
             value={email}
           />

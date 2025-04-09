@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -13,6 +14,13 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+    if (!usernameRegex.test(createUserDto.username)) {
+      throw new BadRequestException(
+        'Username must be a single word with no spaces',
+      );
+    }
+
     await this.isEmailAndUsernameUnique(createUserDto);
 
     return await this.prisma.user.create({ data: createUserDto });
