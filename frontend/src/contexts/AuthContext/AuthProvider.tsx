@@ -4,6 +4,7 @@ import { getUserFromToken, JwtPayload } from "@/utils/decodeUser";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<JwtPayload | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -12,6 +13,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (userData) setUser(userData);
       else logout();
     }
+    setIsLoading(false);
   }, []);
 
   const login = (token: string) => {
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

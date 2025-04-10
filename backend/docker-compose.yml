@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: quizdb123
       POSTGRES_DB: quizdb
     ports:
-      - '5555:5432'
+      - '5666:5432'
     volumes:
       - postgres:/var/lib/postgresql/data
 

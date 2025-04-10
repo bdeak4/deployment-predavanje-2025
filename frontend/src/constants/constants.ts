@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000/api";
+import { API_BASE_URL } from "./api";
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   QUIZ: {
     ALL_QUIZZES: `${API_BASE_URL}/quiz`,
     SEARCH: `${API_BASE_URL}/quiz/search`,
+    SINGLE: (id: string) => `${API_BASE_URL}/quiz/${id}`,
   },
   CATEGORY: {
     ALL_CATEGORIES: `${API_BASE_URL}/category`,

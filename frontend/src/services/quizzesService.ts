@@ -1,3 +1,4 @@
+import api from "@/constants/api";
 import { API_ENDPOINTS } from "@/constants/constants";
 import { Quiz } from "@/types/Quiz";
 import axios from "axios";
@@ -28,6 +29,20 @@ export const fetchQuizzesBySearch = async (
     return response.data;
   } catch (error) {
     console.error("Error fetching quizzes:", error);
+    throw error;
+  }
+};
+
+export const fetchQuizById = async (id: string): Promise<Quiz> => {
+  try {
+    const response = await api.get(`${API_ENDPOINTS.QUIZ.SINGLE(id)}`);
+    if (response.status !== 200) {
+      throw new Error("Something went wrong while fetching quiz");
+    }
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching quiz:", error);
     throw error;
   }
 };

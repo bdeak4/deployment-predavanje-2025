@@ -24,7 +24,7 @@ export function QuizCard({ quiz }: QuizCardProps) {
   return (
     <div className={c.quizCard} onClick={() => handleNavigateQuiz(quiz.id)}>
       <div className={c.imgWrapper}>
-        <img src={quiz.imgUrl} alt="quiz image" />
+        <img src={quiz.imgUrl} loading="lazy" alt="quiz image" />
       </div>
       <div className={c.quizInfo}>
         <h3>{quiz.name}</h3>

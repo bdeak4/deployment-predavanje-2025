@@ -5,6 +5,7 @@ type AuthContextType = {
   user: JwtPayload | null;
   login: (token: string) => void;
   logout: () => void;
+  isLoading: boolean;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(
