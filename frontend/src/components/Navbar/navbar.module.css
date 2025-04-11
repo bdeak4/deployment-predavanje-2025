@@ -28,15 +28,23 @@ input {
   border: 1px solid var(--blue);
   font-weight: bold;
   letter-spacing: 0.3px;
+  transition: all 0.2s ease-in;
+}
+
+.searchBtn:hover,
+.resetBtn:hover {
+  background-color: rgb(226, 231, 238);
+  border: 1px solid var(--blue-hover);
+  transform: translateY(-0.5px);
 }
 
 input {
-  padding: 0.5rem 1rem;
+  padding: 8px 12px;
   border-radius: 5px;
 }
 
 .navigation button {
-  padding: 0.5rem 1rem;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;

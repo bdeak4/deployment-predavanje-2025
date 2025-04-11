@@ -5,6 +5,7 @@ import { Quiz } from "@/types/Quiz";
 import { fetchQuizById } from "@/services/quizzesService";
 import { ClipLoader } from "react-spinners";
 import { useCallback, useState } from "react";
+import { saveQuizResult } from "@/services/quizResultsService";
 
 export function SinglePageQuiz() {
   const { id } = useParams<{ id: string }>();
@@ -38,6 +39,16 @@ export function SinglePageQuiz() {
     );
   }
 
+  const saveResult = async () => {
+    if (!data) return;
+
+    try {
+      await saveQuizResult(id, score);
+    } catch (error) {
+      console.error("Error saving quiz result:", error);
+    }
+  };
+
   const handleAnswerSelect = (answer: string) => {
     if (isAnswered) return;
 
@@ -56,6 +67,7 @@ export function SinglePageQuiz() {
       setIsAnswered(false);
     } else {
       setQuizCompleted(true);
+      saveResult();
     }
   };
 
@@ -69,7 +81,7 @@ export function SinglePageQuiz() {
 
   if (quizCompleted) {
     return (
-      <div className={`${c.completedWrapper} container`}>
+      <div className={`headerPadding container`}>
         <div className={c.quizCompletedContainer}>
           <h2>Quiz Completed!</h2>
           <div className={c.quizStats}>
@@ -179,7 +191,7 @@ export function SinglePageQuiz() {
   };
 
   return (
-    <div className="container">
+    <div className="container headerPadding">
       <div className={c.quizHeader}>
         <h1>{data.name}</h1>
         <p>Category: {data.category.name}</p>

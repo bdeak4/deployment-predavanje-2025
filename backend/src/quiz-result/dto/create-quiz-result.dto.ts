@@ -4,11 +4,6 @@ import { IsInt, IsNotEmpty, IsUUID, Min } from 'class-validator';
 export class CreateQuizResultDto {
   @IsUUID()
   @IsNotEmpty()
-  @ApiProperty({ example: 'b01be10f-3d35-42e0-99d0-14d9c0db4ed2' })
-  userId: string;
-
-  @IsUUID()
-  @IsNotEmpty()
   @ApiProperty({ example: '60633ffd-7486-4d83-ab21-879c599bec03' })
   quizId: string;
 

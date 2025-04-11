@@ -18,15 +18,19 @@ export class QuizResultService {
     private readonly userService: UserService,
   ) {}
 
-  async create(createQuizResultDto: CreateQuizResultDto) {
+  async create(createQuizResultDto: CreateQuizResultDto, userId: string) {
     await this.quizService.findOne(createQuizResultDto.quizId);
-    await this.userService.findOne(createQuizResultDto.userId);
-    await this.userService.updatePoints(
-      createQuizResultDto.userId,
-      createQuizResultDto.score,
-    );
+    console.log(userId);
+    await this.userService.findOne(userId);
+    await this.userService.updatePoints(userId, createQuizResultDto.score);
 
-    return this.prisma.quizResult.create({ data: createQuizResultDto });
+    const quizResultData = {
+      userId: userId,
+      quizId: createQuizResultDto.quizId,
+      score: createQuizResultDto.score,
+    };
+
+    return this.prisma.quizResult.create({ data: quizResultData });
   }
 
   async findAll() {

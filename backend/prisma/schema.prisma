@@ -50,12 +50,13 @@ model Question {
 }
 
 model QuizResult {
-  id     String @id @default(uuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-  quizId String
-  quiz   Quiz   @relation(fields: [quizId], references: [id])
-  score  Int
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id])
+  score       Int
+  completedAt DateTime @default(now())
 }
 
 enum QuestionType {

@@ -39,7 +39,6 @@ export const fetchQuizById = async (id: string): Promise<Quiz> => {
     if (response.status !== 200) {
       throw new Error("Something went wrong while fetching quiz");
     }
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching quiz:", error);

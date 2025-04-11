@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { QuizResultService } from './quiz-result.service';
 import { CreateQuizResultDto } from './dto/create-quiz-result.dto';
@@ -36,8 +37,12 @@ export class QuizResultController {
     description: 'Not found userid or quizid',
   })
   @Post()
-  create(@Body() createQuizResultDto: CreateQuizResultDto) {
-    return this.quizResultService.create(createQuizResultDto);
+  async create(
+    @Body() createQuizResultDto: CreateQuizResultDto,
+    @Req() request,
+  ) {
+    const userId = request.user.userId;
+    return this.quizResultService.create(createQuizResultDto, userId);
   }
 
   @ApiOperation({ summary: 'Get all quiz results' })

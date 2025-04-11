@@ -13,4 +13,7 @@ export const API_ENDPOINTS = {
   CATEGORY: {
     ALL_CATEGORIES: `${API_BASE_URL}/category`,
   },
+  QUIZ_RESULTS: {
+    CREATE: `${API_BASE_URL}/quiz-result`,
+  },
 };

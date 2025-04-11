@@ -53,7 +53,7 @@ export function QuizzesPage() {
     throw new Error(quizzesError ?? categoriesError ?? "Unknown error");
 
   return (
-    <div className={`container ${c.quizzesContainer}`}>
+    <div className={`container headerPadding`}>
       <div className={c.header}>
         <div className={c.headerText}>
           <h1>

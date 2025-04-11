@@ -36,3 +36,7 @@ h5 {
   width: 200px;
   height: 200px;
 }
+
+.headerPadding {
+  padding-top: 120px;
+}
