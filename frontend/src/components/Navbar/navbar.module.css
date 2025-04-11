@@ -1,0 +1,117 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: var(--white-background);
+  box-shadow: 0px 6px 13px -1px rgb(196, 195, 195);
+  border-bottom: 2px solid var(--blue);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  letter-spacing: 0.3px;
+}
+
+.searchAndAvatar {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.navigation form {
+  display: flex;
+  gap: 6px;
+}
+.searchBtn,
+.resetBtn,
+input {
+  border: 1px solid var(--blue);
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.navigation button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.authBtns {
+  display: flex;
+  gap: 7px;
+}
+
+.loginBtn {
+  background-color: var(--white);
+  border: 2px solid var(--green);
+  color: var(--green);
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+}
+
+.loginBtn:hover {
+  background-color: var(--green);
+  color: white;
+}
+
+.registerBtn {
+  background-color: var(--green);
+  border: 2px solid var(--green);
+  color: white;
+  transition: background-color 0.2s ease;
+  letter-spacing: 0.3px;
+}
+
+.registerBtn:hover {
+  background-color: var(--light-green);
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.sideMenu {
+  position: fixed;
+  top: 78px;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--white-background);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 1000;
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sideMenu button {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s ease;
+}
+
+.sideMenu button:hover {
+  color: var(--blue-hover);
+}

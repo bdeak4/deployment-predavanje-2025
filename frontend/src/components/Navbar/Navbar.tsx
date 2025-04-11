@@ -1,11 +1,27 @@
 import c from "./navbar.module.css";
 import { FormEvent, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useAuth } from "@/contexts";
+import { paths } from "@/router/paths";
+import { AvatarMenu } from "./AvatarMenu";
 
 export const Navbar = () => {
   const [searchParam, setSearchParam] = useState<string>("");
+  const { user } = useAuth();
+
   const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate(paths.login);
+  };
+
+  const handleRegisterClick = () => {
+    navigate(paths.register);
+  };
+
+  const handleReset = () => {
+    setSearchParam("");
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchParam(e.target.value);
@@ -14,11 +30,7 @@ export const Navbar = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (searchParam.trim()) {
-      navigate(`/?search=${searchParam}`);
-    } else {
-      toast.error("Please enter a search term.");
-    }
+    navigate(`/?search=${searchParam}`);
   };
 
   return (
@@ -26,16 +38,34 @@ export const Navbar = () => {
       <div className={c.logo}>
         <h3>Dump Quiz</h3>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={searchParam}
-          onChange={handleChange}
-          placeholder="Search quizzes"
-        />
-        <button type="submit">Search</button>
-      </form>
-      <Toaster />
+      <div className={c.searchAndAvatar}>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={searchParam}
+            onChange={handleChange}
+            placeholder="Search quizzes"
+          />
+          <button type="submit" className={c.searchBtn}>
+            Search
+          </button>
+          <button className={c.resetBtn} onClick={handleReset}>
+            Reset
+          </button>
+        </form>
+        {user ? (
+          <AvatarMenu />
+        ) : (
+          <div className={c.authBtns}>
+            <button className={c.loginBtn} onClick={handleLoginClick}>
+              Log in
+            </button>
+            <button className={c.registerBtn} onClick={handleRegisterClick}>
+              Register
+            </button>
+          </div>
+        )}
+      </div>
     </nav>
   );
 };

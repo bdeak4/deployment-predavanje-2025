@@ -5,6 +5,10 @@
   gap: 30px;
 }
 
+.quizzesContainer {
+  padding-top: 110px;
+}
+
 .headerText {
   margin-bottom: 2rem;
 }

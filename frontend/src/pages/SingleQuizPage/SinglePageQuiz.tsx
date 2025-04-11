@@ -44,7 +44,7 @@ export function SinglePageQuiz() {
     setSelectedAnswer(answer);
     setIsAnswered(true);
 
-    if (answer === currentQuestion.answer) {
+    if (answer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
       setScore(score + 10);
     }
   };
@@ -69,7 +69,7 @@ export function SinglePageQuiz() {
 
   if (quizCompleted) {
     return (
-      <div className="container">
+      <div className={`${c.completedWrapper} container`}>
         <div className={c.quizCompletedContainer}>
           <h2>Quiz Completed!</h2>
           <div className={c.quizStats}>
@@ -158,7 +158,8 @@ export function SinglePageQuiz() {
               <div className={c.answerFeedback}>
                 <p
                   className={
-                    selectedAnswer === currentQuestion.answer
+                    selectedAnswer?.toLowerCase() ===
+                    currentQuestion.answer.toLowerCase()
                       ? c.correct
                       : c.incorrect
                   }

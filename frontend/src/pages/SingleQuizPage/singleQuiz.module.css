@@ -163,6 +163,10 @@
   font-weight: bold;
 }
 
+.completedWrapper {
+  margin-top: 120px !important;
+}
+
 .quizCompletedContainer {
   text-align: center;
   padding: 2rem;
