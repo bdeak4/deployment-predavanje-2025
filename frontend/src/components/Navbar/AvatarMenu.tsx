@@ -34,8 +34,9 @@ export const AvatarMenu = () => {
     border: "none",
     padding: "10px 20px",
     backgroundColor: "transparent",
+    cursor: "pointer",
     "&:hover": {
-      backgroundColor: "var(--light-blue)",
+      backgroundColor: "var(--lightest-blue)",
     },
     transition: "background-color 0.3s ease",
   });
@@ -50,22 +51,27 @@ export const AvatarMenu = () => {
         anchor="right"
         open={isDrawerOpen}
         onClose={handleToggleDrawer}
+        hideBackdrop
+        style={{ pointerEvents: "none" }}
         slotProps={{
           paper: {
             sx: {
-              top: "78px",
+              top: "74px",
               height: "calc(100vh - 78px)",
               width: 250,
               backgroundColor: "var(--white-background)",
-              boxShadow: "none",
             },
           },
         }}
       >
-        <Box role="presentation" onClick={handleToggleDrawer}>
+        <Box
+          role="presentation"
+          onClick={handleToggleDrawer}
+          style={{ pointerEvents: "all" }}
+        >
           <List>
             <ListItem component="button" sx={generateListItemStyle()}>
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: "var(--blue)" }}>
                 <StatsIcon fontSize="medium" />
               </ListItemIcon>
               <ListItemText primary="Stats" />
@@ -73,7 +79,7 @@ export const AvatarMenu = () => {
 
             {user?.role === Role.Admin && (
               <ListItem component="button" sx={generateListItemStyle()}>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: "var(--blue)" }}>
                   <AdminIcon fontSize="medium" />
                 </ListItemIcon>
                 <ListItemText primary="Admin" />
@@ -85,7 +91,7 @@ export const AvatarMenu = () => {
               sx={generateListItemStyle()}
               onClick={handleLogout}
             >
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: "red" }}>
                 <LogoutIcon fontSize="medium" />
               </ListItemIcon>
               <ListItemText primary="Logout" />
