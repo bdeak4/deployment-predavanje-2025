@@ -39,7 +39,7 @@ export class QuizResultController {
   @Post()
   async create(
     @Body() createQuizResultDto: CreateQuizResultDto,
-    @Req() request,
+    @Req() request: any,
   ) {
     const userId = request.user.userId;
     return this.quizResultService.create(createQuizResultDto, userId);

@@ -3,4 +3,6 @@ export const paths = {
   login: "/login",
   register: "/register",
   quiz: (id: string) => `/quiz/${id}`,
+  stats: "/stats",
+  admin: "/admin",
 };

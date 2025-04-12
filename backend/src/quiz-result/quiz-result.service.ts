@@ -20,7 +20,6 @@ export class QuizResultService {
 
   async create(createQuizResultDto: CreateQuizResultDto, userId: string) {
     await this.quizService.findOne(createQuizResultDto.quizId);
-    console.log(userId);
     await this.userService.findOne(userId);
     await this.userService.updatePoints(userId, createQuizResultDto.score);
 

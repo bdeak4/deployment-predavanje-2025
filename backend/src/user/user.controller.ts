@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -69,9 +70,10 @@ export class UserController {
     status: 404,
     description: 'Not found',
   })
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+  @Get('me')
+  findOne(@Req() request: any) {
+    const userId = request.user.userId;
+    return this.userService.findOne(userId);
   }
 
   @UseGuards(UserGuard)

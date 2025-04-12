@@ -13,7 +13,6 @@ export function QuizCard({ quiz }: QuizCardProps) {
   const navigate = useNavigate();
 
   const handleNavigateQuiz = (id: string) => {
-    console.log(user);
     if (!user) {
       toast.error("You have to log in to participate in quiz");
       navigate(paths.login);

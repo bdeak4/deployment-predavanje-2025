@@ -21,6 +21,6 @@
 }
 
 .select:focus {
-  border-color: var(--blue-hover); /* Change to match your theme */
+  border-color: var(--blue-hover);
   outline: none;
 }
