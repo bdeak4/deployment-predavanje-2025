@@ -176,7 +176,8 @@ export function SinglePageQuiz() {
                       : c.incorrect
                   }
                 >
-                  {selectedAnswer === currentQuestion.answer
+                  {selectedAnswer?.toLowerCase() ===
+                  currentQuestion.answer.toLowerCase()
                     ? "Correct!"
                     : `Incorrect. The answer is: ${currentQuestion.answer}`}
                 </p>
