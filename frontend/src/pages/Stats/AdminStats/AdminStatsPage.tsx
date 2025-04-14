@@ -6,15 +6,16 @@ type AdminStatsPageProps = {
 
 export const AdminStatsPage = ({ data }: AdminStatsPageProps) => {
   return (
-    <div className="headerPadding container">
-      <h2>Leaderboard</h2>
-      <ul>
+    <div>
+      <h2 className={c.heading}>Leaderboard</h2>
+      <ul className={c.list}>
         {data.map((user, index) => (
-          <li key={user.id}>
-            <span>
-              {index + 1} {user.username}
-            </span>
-            <span>{user.points} pts</span>
+          <li key={user.id} className={c.card}>
+            <div className={c.left}>
+              <span className={c.rank}>{index + 1}</span>
+              <span className={c.username}>{user.username}</span>
+            </div>
+            <div className={c.points}>{user.points} pts</div>
           </li>
         ))}
       </ul>
