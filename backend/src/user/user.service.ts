@@ -62,7 +62,12 @@ export class UserService {
 
   async getRanking(user: any) {
     const allUsers = await this.prisma.user.findMany({
-      select: { id: true, username: true, points: true, quizResults: true },
+      select: {
+        id: true,
+        username: true,
+        points: true,
+        quizResults: { include: { quiz: true } },
+      },
       orderBy: { points: 'desc' },
     });
 

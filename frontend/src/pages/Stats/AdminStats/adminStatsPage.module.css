@@ -10,24 +10,29 @@
 
 .card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   background-color: #f9f9f9;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   margin-bottom: 0.75rem;
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-2px);
 }
 
-.left {
+.position {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
 }
 
 .rank {
@@ -38,4 +43,22 @@
 .username {
   font-weight: bold;
   color: #333;
+  font-size: 18px;
+}
+
+.results {
+  margin-top: 1rem;
+}
+
+.resultsWrapper {
+  margin-top: 1rem;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.resultsWrapper.open {
+  height: auto;
+  opacity: 1;
 }
