@@ -8,6 +8,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Role } from 'src/enums/Role';
 
 @Injectable()
 export class UserService {
@@ -57,6 +58,31 @@ export class UserService {
 
   async findAll() {
     return await this.prisma.user.findMany({ include: { quizResults: true } });
+  }
+
+  async getRanking(user: any) {
+    const allUsers = await this.prisma.user.findMany({
+      select: { id: true, username: true, points: true, quizResults: true },
+      orderBy: { points: 'desc' },
+    });
+
+    if (user.role === Role.Admin) {
+      return allUsers;
+    }
+
+    const rank = allUsers.findIndex((u) => u.id === user.userId) + 1;
+
+    const currentUser = await this.prisma.user.findUnique({
+      where: { id: user.userId },
+      select: {
+        id: true,
+        username: true,
+        points: true,
+        quizResults: { include: { quiz: true } },
+      },
+    });
+
+    return { user: currentUser, rank: rank, totalUsers: allUsers.length };
   }
 
   async findOne(id: string) {

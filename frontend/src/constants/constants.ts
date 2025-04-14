@@ -10,6 +10,9 @@ export const API_ENDPOINTS = {
     SEARCH: `${API_BASE_URL}/quiz/search`,
     SINGLE: (id: string) => `${API_BASE_URL}/quiz/${id}`,
   },
+  USER: {
+    RANKING: `${API_BASE_URL}/user/ranking`,
+  },
   CATEGORY: {
     ALL_CATEGORIES: `${API_BASE_URL}/category`,
   },

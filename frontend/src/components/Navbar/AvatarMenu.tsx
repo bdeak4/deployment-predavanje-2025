@@ -16,13 +16,24 @@ import {
 import { useAuth } from "@/contexts";
 import { Role } from "@/enums/Role";
 import avatar from "@/assets/images/avatar.png";
+import { useNavigate } from "react-router";
+import { paths } from "@/router/paths";
 
 export const AvatarMenu = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleToggleDrawer = () => {
     setIsDrawerOpen((prev) => !prev);
+  };
+
+  const handleStats = () => {
+    navigate(paths.stats);
+  };
+
+  const handleAdmin = () => {
+    navigate(paths.admin);
   };
 
   const handleLogout = () => {
@@ -70,7 +81,11 @@ export const AvatarMenu = () => {
           style={{ pointerEvents: "all" }}
         >
           <List>
-            <ListItem component="button" sx={generateListItemStyle()}>
+            <ListItem
+              component="button"
+              sx={generateListItemStyle()}
+              onClick={handleStats}
+            >
               <ListItemIcon sx={{ color: "var(--blue)" }}>
                 <StatsIcon fontSize="medium" />
               </ListItemIcon>
@@ -78,7 +93,11 @@ export const AvatarMenu = () => {
             </ListItem>
 
             {user?.role === Role.Admin && (
-              <ListItem component="button" sx={generateListItemStyle()}>
+              <ListItem
+                component="button"
+                sx={generateListItemStyle()}
+                onClick={handleAdmin}
+              >
                 <ListItemIcon sx={{ color: "var(--blue)" }}>
                   <AdminIcon fontSize="medium" />
                 </ListItemIcon>

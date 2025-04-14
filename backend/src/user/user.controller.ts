@@ -54,6 +54,13 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @UseGuards(UserGuard)
+  @Get('ranking')
+  getRanking(@Req() request: any) {
+    const user = request.user;
+    return this.userService.getRanking(request.user);
+  }
+
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get unique user by ID' })
   @ApiParam({
