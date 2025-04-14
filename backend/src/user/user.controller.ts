@@ -55,6 +55,13 @@ export class UserController {
   }
 
   @UseGuards(UserGuard)
+  @ApiOperation({
+    summary: 'Get ranking for all users or single user (depends of role)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User/Users ranking found successfully',
+  })
   @Get('ranking')
   getRanking(@Req() request: any) {
     const user = request.user;

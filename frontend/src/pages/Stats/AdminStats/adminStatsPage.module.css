@@ -1,7 +1,11 @@
 .heading {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #333;
+}
+
+.instruction {
+  margin-bottom: 2rem;
 }
 
 .list {
@@ -46,12 +50,7 @@
   font-size: 18px;
 }
 
-.results {
-  margin-top: 1rem;
-}
-
 .resultsWrapper {
-  margin-top: 1rem;
   overflow: hidden;
   height: 0;
   opacity: 0;
@@ -59,6 +58,7 @@
 }
 
 .resultsWrapper.open {
+  margin-top: 1rem;
   height: auto;
   opacity: 1;
 }

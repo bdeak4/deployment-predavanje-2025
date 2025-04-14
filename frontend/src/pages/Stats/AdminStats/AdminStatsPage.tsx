@@ -16,6 +16,9 @@ export const AdminStatsPage = ({ data }: AdminStatsPageProps) => {
   return (
     <div>
       <h2 className={c.heading}>Leaderboard</h2>
+      <p className={c.instruction}>
+        Click on a user card to view their quiz results and details
+      </p>
       <div className={c.list}>
         {data.map((user, index) => (
           <div
