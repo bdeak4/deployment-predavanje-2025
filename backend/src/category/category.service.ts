@@ -27,9 +27,18 @@ export class CategoryService {
   }
 
   async findByName(name: string) {
-    return await this.prisma.category.findUnique({
-      where: { name: name },
-      include: { quizzes: { include: { quizResults: true } } },
+    return await this.prisma.category.findFirst({
+      where: {
+        name: {
+          equals: name,
+          mode: 'insensitive',
+        },
+      },
+      include: {
+        quizzes: {
+          include: { quizResults: true },
+        },
+      },
     });
   }
 
