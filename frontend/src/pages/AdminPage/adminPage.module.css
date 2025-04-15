@@ -1,0 +1,21 @@
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+
+.buttonGroup button {
+  padding: 12px 48px;
+
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonGroup button:hover {
+  background-color: var(--blue-hover);
+}
