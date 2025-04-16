@@ -20,10 +20,18 @@
 }
 
 .questionForm {
-  background-color: var(--white-background);
+  background-color: var(--white-background) !important;
   border: 1px solid #ced8fc;
 }
 
 .addOption {
   align-self: flex-start;
+}
+
+.addQuestion {
+  margin-top: 60px;
+}
+
+.shortAnswerWrapper {
+  margin-top: 10px;
 }

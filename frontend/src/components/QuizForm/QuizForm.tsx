@@ -11,6 +11,7 @@ import { AddQuestion } from "@/types/addQuestion";
 import { QuestionForm } from "../QuestionForm/QuestionForm";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { ClipLoader } from "react-spinners";
 
 type QuizFormProps = {
   setShowQuizForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,11 +19,12 @@ type QuizFormProps = {
 export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
   const [showQuestionForm, setShowQuestionForm] = useState<boolean>(false);
   const [quizName, setQuizName] = useState<string>("");
-  const [questions, setQuestions] = useState<AddQuestion[] | null>(null);
+  const [questions, setQuestions] = useState<AddQuestion[]>([]);
   const [categoryId, setCategoryId] = useState<string | undefined>("");
   const [error, setError] = useState<string>("");
 
-  const { data: categories } = useFetch<Category[]>(fetchAllCategories);
+  const { data: categories, isLoading } =
+    useFetch<Category[]>(fetchAllCategories);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,10 +32,23 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
       toast.error("Choose category");
       return;
     }
+    if (questions.length < 5) {
+      toast.error("Quiz must have at least 5 different questions");
+      return;
+    }
     toast.success("Successfully added quiz");
     setShowQuizForm(false);
     setError("");
   };
+
+  if (isLoading) {
+    return (
+      <div className="loader">
+        <ClipLoader size={100} color="#669e76" />
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="addForm">
       <InputField
@@ -52,6 +67,18 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
       )}
 
       <div className={c.questionSection}>
+        {questions && questions.length > 0 && (
+          <div className={c.addedQuestions}>
+            <h4>Added Questions:</h4>
+            <div className={c.questionsWrapper}>
+              {questions.map((question, index) => (
+                <div key={index}>
+                  {index + 1}. {question.text} - answer: {question.answer}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {!showQuestionForm ? (
           <Button
             startIcon={<AddIcon />}
@@ -62,7 +89,11 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
             Add Question
           </Button>
         ) : (
-          <QuestionForm questions={questions} setQuestions={setQuestions} />
+          <QuestionForm
+            questions={questions}
+            setQuestions={setQuestions}
+            setShowQuestionForm={setShowQuestionForm}
+          />
         )}
       </div>
 

@@ -7,3 +7,4 @@ export * from "./CategoryForm/CategoryForm";
 export * from "./QuizForm/QuizForm";
 export * from "./AddButton/AddButton";
 export * from "./QuestionForm/QuestionForm";
+export * from "./MultipleChoiceOptions/MultipleChoiceOptions";

@@ -1,0 +1,15 @@
+.optionsList {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionItem {
+  display: flex;
+  justify-content: space-between;
+}
+.optionActions {
+  display: flex;
+  gap: 10px;
+}
