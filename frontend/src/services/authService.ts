@@ -8,10 +8,6 @@ export const loginService = async (prompt: string, password: string) => {
       password: password,
     });
 
-    if (response.status !== 201) {
-      throw new Error("Something went wrong.");
-    }
-
     return response.data;
   } catch (error) {
     console.error("Login error:", error);
@@ -30,10 +26,6 @@ export const register = async (
       email: email,
       password: password,
     });
-
-    if (response.status !== 201) {
-      throw new Error("Something went wrong.");
-    }
 
     return response.data;
   } catch (error) {

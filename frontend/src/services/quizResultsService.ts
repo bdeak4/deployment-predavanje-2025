@@ -7,9 +7,7 @@ export const saveQuizResult = async (quizId: string, score: number) => {
       quizId: quizId,
       score: score,
     });
-    if (response.status !== 201) {
-      throw new Error("Something went wrong while creating quiz result.");
-    }
+
     return response.data;
   } catch (error) {
     console.error("Error while creating quiz result:", error);
