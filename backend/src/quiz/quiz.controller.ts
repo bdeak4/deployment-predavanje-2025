@@ -45,6 +45,7 @@ export class QuizController {
   })
   @Post()
   create(@Body() createQuizDto: CreateQuizDto) {
+    console.log('Bar sam usa');
     return this.quizService.create(createQuizDto);
   }
 

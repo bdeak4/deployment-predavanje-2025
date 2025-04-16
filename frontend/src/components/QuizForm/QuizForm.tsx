@@ -12,6 +12,7 @@ import { QuestionForm } from "../QuestionForm/QuestionForm";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { ClipLoader } from "react-spinners";
+import { createQuiz } from "@/services/quizzesService";
 
 type QuizFormProps = {
   setShowQuizForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,7 +27,7 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
   const { data: categories, isLoading } =
     useFetch<Category[]>(fetchAllCategories);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!categoryId) {
       toast.error("Choose category");
@@ -36,9 +37,22 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
       toast.error("Quiz must have at least 5 different questions");
       return;
     }
-    toast.success("Successfully added quiz");
-    setShowQuizForm(false);
-    setError("");
+
+    try {
+      await createQuiz({
+        name: quizName,
+        categoryId: categoryId,
+        questions: questions,
+      });
+
+      toast.success("Successfully added quiz");
+      setShowQuizForm(false);
+      setError("");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to create quiz"
+      );
+    }
   };
 
   if (isLoading) {

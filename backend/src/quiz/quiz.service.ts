@@ -26,17 +26,15 @@ export class QuizService {
       createQuizDto.categoryId,
     );
 
-    const duplicateTexts = await this.prisma.question.findMany({
-      where: {
-        text: {
-          in: createQuizDto.questions.map((q) => q.text.trim()),
-          mode: 'insensitive',
-        },
-      },
-    });
+    const questionTexts = createQuizDto.questions.map((q) =>
+      q.text.trim().toLowerCase(),
+    );
+    const uniqueQuestionTexts = new Set(questionTexts);
 
-    if (duplicateTexts.length > 0) {
-      throw new ConflictException(`Some question texts are same.`);
+    if (uniqueQuestionTexts.size < questionTexts.length) {
+      throw new ConflictException(
+        `There are duplicate question texts in your quiz.`,
+      );
     }
 
     return await this.prisma.quiz.create({

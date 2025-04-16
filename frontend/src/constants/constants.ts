@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
     ALL_QUIZZES: `${API_BASE_URL}/quiz`,
     SEARCH: `${API_BASE_URL}/quiz/search`,
     SINGLE: (id: string) => `${API_BASE_URL}/quiz/${id}`,
+    CREATE: `${API_BASE_URL}/quiz`,
   },
   USER: {
     RANKING: `${API_BASE_URL}/user/ranking`,
