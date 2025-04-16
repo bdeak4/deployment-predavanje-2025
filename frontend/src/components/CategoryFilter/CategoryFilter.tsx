@@ -21,7 +21,7 @@ export const CategoryFilter = ({
       <select className={c.select} onChange={handleCategoryChange}>
         <option value="">All Categories</option>
         {categories.map((category, index) => (
-          <option key={index} value={category.name}>
+          <option key={index} value={category.id}>
             {category.name}
           </option>
         ))}

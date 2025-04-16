@@ -14,7 +14,7 @@ export function QuizzesPage() {
   const { user } = useAuth();
   const { search } = useLocation();
   const [filteredData, setFilteredData] = useState<Quiz[]>([]);
-  const [category, setCategory] = useState<string | undefined>();
+  const [categoryId, setCategoryId] = useState<string | undefined>();
 
   const {
     data: quizzes,
@@ -35,11 +35,11 @@ export function QuizzesPage() {
         const isMatch =
           !searchQuery ||
           quiz.name.toLowerCase().includes(searchQuery.toLowerCase());
-        return isMatch && (!category || quiz.category.name === category);
+        return isMatch && (!categoryId || quiz.category.id === categoryId);
       });
       setFilteredData(filteredQuizzes);
     }
-  }, [quizzes, search, category]);
+  }, [quizzes, search, categoryId]);
 
   if (quizzesLoading || categoriesLoading) {
     return (
@@ -73,7 +73,7 @@ export function QuizzesPage() {
           </p>
         </div>
         {categories && (
-          <CategoryFilter categories={categories} setCategory={setCategory} />
+          <CategoryFilter categories={categories} setCategory={setCategoryId} />
         )}
       </div>
 
