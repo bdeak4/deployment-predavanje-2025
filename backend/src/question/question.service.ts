@@ -33,6 +33,17 @@ export class QuestionService {
     return question;
   }
 
+  async findExistingByText(texts: string[]) {
+    return this.prisma.question.findMany({
+      where: {
+        text: {
+          in: texts.map((t) => t.trim()),
+          mode: 'insensitive',
+        },
+      },
+    });
+  }
+
   async update(id: string, updateQuestionDto: UpdateQuestionDto) {
     await this.findOne(id);
 

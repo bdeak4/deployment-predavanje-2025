@@ -26,7 +26,34 @@ export class QuizService {
       createQuizDto.categoryId,
     );
 
-    return await this.prisma.quiz.create({ data: createQuizDto });
+    const duplicateTexts = await this.prisma.question.findMany({
+      where: {
+        text: {
+          in: createQuizDto.questions.map((q) => q.text.trim()),
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    if (duplicateTexts.length > 0) {
+      throw new ConflictException(`Some question texts are same.`);
+    }
+
+    return await this.prisma.quiz.create({
+      data: {
+        name: createQuizDto.name,
+        imgUrl: createQuizDto.imgUrl,
+        categoryId: createQuizDto.categoryId,
+        questions: {
+          create: createQuizDto.questions.map((q) => ({
+            text: q.text,
+            type: q.type,
+            options: q.options,
+            answer: q.answer,
+          })),
+        },
+      },
+    });
   }
 
   async searchQuizzesByName(name: string) {
