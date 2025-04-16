@@ -23,7 +23,3 @@
 .categoryForm button:hover {
   background-color: var(--green);
 }
-
-.errorMessage {
-  color: red;
-}

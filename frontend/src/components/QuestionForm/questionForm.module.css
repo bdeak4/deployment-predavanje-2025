@@ -1,0 +1,29 @@
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.select {
+  padding: 8px 12px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  width: 100%;
+  background-color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: var(--blue-hover);
+  outline: none;
+}
+
+.questionForm {
+  background-color: var(--white-background);
+  border: 1px solid #ced8fc;
+}
+
+.addOption {
+  align-self: flex-start;
+}

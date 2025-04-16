@@ -4,3 +4,6 @@ export * from "./QuizCard/QuizCard";
 export * from "./CategoryFilter/CategoryFilter";
 export * from "./QuizResultCard/QuizResultCard";
 export * from "./CategoryForm/CategoryForm";
+export * from "./QuizForm/QuizForm";
+export * from "./AddButton/AddButton";
+export * from "./QuestionForm/QuestionForm";

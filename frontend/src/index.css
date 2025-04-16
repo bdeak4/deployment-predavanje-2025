@@ -40,3 +40,18 @@ h5 {
 .headerPadding {
   padding-top: 120px;
 }
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 500px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+  padding: 20px 15px;
+  border-radius: 8px;
+}
+
+.errorMessage {
+  color: red;
+}

@@ -73,7 +73,11 @@ export function QuizzesPage() {
           </p>
         </div>
         {categories && (
-          <CategoryFilter categories={categories} setCategory={setCategoryId} />
+          <CategoryFilter
+            label="Filter by Category:"
+            categories={categories}
+            setCategory={setCategoryId}
+          />
         )}
       </div>
 
