@@ -42,7 +42,6 @@ export const fetchQuizById = async (id: string): Promise<Quiz> => {
 };
 
 export const createQuiz = async (params: CreateQuiz) => {
-  console.log(params);
   try {
     await api.post(`${API_ENDPOINTS.QUIZ.CREATE}`, params);
   } catch (error) {

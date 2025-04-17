@@ -27,7 +27,7 @@ export const QuestionForm = ({
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newType = e.target.value as QuestionType;
     setType(newType);
-    console.log(answer);
+
     if (newType === "MULTIPLE_CHOICE") {
       setOptions([]);
       setAnswer("");

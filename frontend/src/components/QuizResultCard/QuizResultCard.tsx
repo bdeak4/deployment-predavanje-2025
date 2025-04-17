@@ -6,7 +6,6 @@ type QuizResultCardProps = {
 
 export const QuizResultCard = ({ result }: QuizResultCardProps) => {
   const date = new Date(result.completedAt).toLocaleDateString();
-  console.log(result);
 
   return (
     <div className={c.card}>

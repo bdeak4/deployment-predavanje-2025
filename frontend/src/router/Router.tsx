@@ -6,7 +6,7 @@ import { useLocation, useRoutes } from "react-router";
 import { paths } from "./paths";
 import { QuizzesPage } from "@/pages/Quizzes";
 import { SinglePageQuiz } from "@/pages/SingleQuizPage";
-import { PrivateRoute } from "@/contexts";
+import { AdminRoute, PrivateRoute } from "@/contexts";
 import { StatsPage } from "@/pages/Stats";
 import { AdminPage } from "@/pages/AdminPage";
 
@@ -37,11 +37,11 @@ export default function Router() {
               path: paths.stats,
               element: <StatsPage />,
             },
-            {
-              path: paths.admin,
-              element: <AdminPage />,
-            },
           ],
+        },
+        {
+          element: <AdminRoute />,
+          children: [{ path: paths.admin, element: <AdminPage /> }],
         },
       ],
     },

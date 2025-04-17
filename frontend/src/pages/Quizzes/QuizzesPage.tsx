@@ -9,6 +9,7 @@ import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { Category } from "@/types/Category";
 import { fetchAllCategories } from "@/services/categoryService";
+import { Toaster } from "react-hot-toast";
 
 export function QuizzesPage() {
   const { user } = useAuth();
@@ -91,6 +92,7 @@ export function QuizzesPage() {
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
