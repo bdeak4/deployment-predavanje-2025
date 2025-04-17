@@ -2,13 +2,17 @@ import { BrowserRouter } from "react-router";
 import Router from "./router/Router";
 import "./index.css";
 import { AuthProvider } from "./contexts";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./error";
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
-    </BrowserRouter>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
