@@ -9,6 +9,7 @@ import { SinglePageQuiz } from "@/pages/SingleQuizPage";
 import { AdminRoute, PrivateRoute } from "@/contexts";
 import { StatsPage } from "@/pages/Stats";
 import { AdminPage } from "@/pages/AdminPage";
+import { CategoryForm, QuizForm } from "@/components";
 
 export default function Router() {
   const location = useLocation();
@@ -41,7 +42,11 @@ export default function Router() {
         },
         {
           element: <AdminRoute />,
-          children: [{ path: paths.admin, element: <AdminPage /> }],
+          children: [
+            { path: paths.admin, element: <AdminPage /> },
+            { path: paths.createQuiz, element: <QuizForm /> },
+            { path: paths.createCategory, element: <CategoryForm /> },
+          ],
         },
       ],
     },

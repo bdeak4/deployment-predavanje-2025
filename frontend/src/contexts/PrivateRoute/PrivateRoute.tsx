@@ -16,7 +16,7 @@ export function PrivateRoute() {
   }
 
   if (!user) {
-    toast.error("You must log in to access quiz");
+    toast.error("You must log in to access this page");
     return <Navigate to={paths.login} />;
   }
 

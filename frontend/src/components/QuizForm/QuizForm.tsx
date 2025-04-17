@@ -14,10 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { ClipLoader } from "react-spinners";
 import { createQuiz } from "@/services/quizzesService";
 
-type QuizFormProps = {
-  setShowQuizForm: React.Dispatch<React.SetStateAction<boolean>>;
-};
-export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
+export const QuizForm = () => {
   const [showQuestionForm, setShowQuestionForm] = useState<boolean>(false);
   const [quizName, setQuizName] = useState<string>("");
   const [questions, setQuestions] = useState<AddQuestion[]>([]);
@@ -46,7 +43,6 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
       });
 
       toast.success("Successfully added quiz");
-      setShowQuizForm(false);
       setError("");
     } catch (error) {
       toast.error(
@@ -64,57 +60,60 @@ export const QuizForm = ({ setShowQuizForm }: QuizFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="addForm">
-      <InputField
-        label="Quiz name"
-        type="text"
-        placeholder="Enter quiz name"
-        onChange={setQuizName}
-        value={quizName}
-      />
-      {categories && (
-        <CategoryFilter
-          label="Choose category"
-          categories={categories}
-          setCategory={setCategoryId}
+    <div className="container headerPadding">
+      <h1 className={c.formHeading}>Creating new Quiz</h1>
+      <form onSubmit={handleSubmit} className="addForm">
+        <InputField
+          label="Quiz name"
+          type="text"
+          placeholder="Enter quiz name"
+          onChange={setQuizName}
+          value={quizName}
         />
-      )}
-
-      <div className={c.questionSection}>
-        {questions && questions.length > 0 && (
-          <div className={c.addedQuestions}>
-            <h4>Added Questions:</h4>
-            <div className={c.questionsWrapper}>
-              {questions.map((question, index) => (
-                <div key={index}>
-                  {index + 1}. {question.text} - answer: {question.answer}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {!showQuestionForm ? (
-          <Button
-            startIcon={<AddIcon />}
-            variant="outlined"
-            onClick={() => setShowQuestionForm(true)}
-            className={c.addQuestion}
-          >
-            Add Question
-          </Button>
-        ) : (
-          <QuestionForm
-            questions={questions}
-            setQuestions={setQuestions}
-            setShowQuestionForm={setShowQuestionForm}
+        {categories && (
+          <CategoryFilter
+            label="Choose category"
+            categories={categories}
+            setCategory={setCategoryId}
           />
         )}
-      </div>
 
-      {error && <div className="errorMessage">{error}</div>}
+        <div className={c.questionSection}>
+          {questions && questions.length > 0 && (
+            <div className={c.addedQuestions}>
+              <h4>Added Questions:</h4>
+              <div className={c.questionsWrapper}>
+                {questions.map((question, index) => (
+                  <div key={index}>
+                    {index + 1}. {question.text} - answer: {question.answer}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {!showQuestionForm ? (
+            <Button
+              startIcon={<AddIcon />}
+              variant="outlined"
+              onClick={() => setShowQuestionForm(true)}
+              className={c.addQuestion}
+            >
+              Add Question
+            </Button>
+          ) : (
+            <QuestionForm
+              questions={questions}
+              setQuestions={setQuestions}
+              setShowQuestionForm={setShowQuestionForm}
+            />
+          )}
+        </div>
 
-      <AddButton />
-      <Toaster />
-    </form>
+        {error && <div className="errorMessage">{error}</div>}
+
+        <AddButton />
+        <Toaster />
+      </form>
+    </div>
   );
 };
