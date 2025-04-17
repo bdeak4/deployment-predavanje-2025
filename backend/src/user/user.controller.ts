@@ -69,12 +69,7 @@ export class UserController {
   }
 
   @UseGuards(AdminGuard)
-  @ApiOperation({ summary: 'Get unique user by ID' })
-  @ApiParam({
-    name: 'id',
-    description: 'Enter user ID (UUID)',
-    example: '550e8400-e29b-41d4-a716-446655440000',
-  })
+  @ApiOperation({ summary: 'Get unique user by ID in request params' })
   @ApiResponse({
     status: 200,
     description: 'User found successfully',

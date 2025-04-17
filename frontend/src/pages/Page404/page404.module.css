@@ -1,0 +1,25 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.pageWrapper img {
+  max-width: 800px;
+}
+
+.goHomeBtn {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid var(--green);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.goHomeBtn:hover {
+  background-color: var(--light-green);
+  color: var(--white);
+}
