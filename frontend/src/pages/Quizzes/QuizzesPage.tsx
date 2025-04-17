@@ -30,7 +30,6 @@ export function QuizzesPage() {
   } = useFetch<Category[]>(fetchAllCategories);
 
   useEffect(() => {
-    throw new Error("MOj errrrrorr");
     if (quizzes) {
       const searchQuery = new URLSearchParams(search).get("search");
       const filteredQuizzes = quizzes.filter((quiz) => {
