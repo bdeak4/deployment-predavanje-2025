@@ -8,9 +8,23 @@ import { UserModule } from './user/user.module';
 import { QuizResultModule } from './quiz-result/quiz-result.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+
 
 @Module({
-  imports: [QuestionModule, QuizModule, CategoryModule, UserModule, QuizResultModule, PrismaModule, AuthModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', '..', 'frontend', 'dist'),
+    }),
+    QuestionModule,
+    QuizModule,
+    CategoryModule,
+    UserModule,
+    QuizResultModule,
+    PrismaModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

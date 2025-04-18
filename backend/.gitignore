@@ -12,6 +12,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+prisma/seed.js
+prisma/seed.js.map
+prisma/seed.d.ts
 # OS
 .DS_Store
 

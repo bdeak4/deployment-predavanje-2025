@@ -1,0 +1,12 @@
+node_modules/
+*/node_modules/
+**/node_modules/
+
+.turbo/
+
+dist/
+**/dist/
+
+logs
+*.log
+npm-debug.log*

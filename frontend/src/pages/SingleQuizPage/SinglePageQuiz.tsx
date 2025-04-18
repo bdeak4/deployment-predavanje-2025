@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import c from "./singleQuiz.module.css";
 import useFetch from "@/hooks/useFetch";
 import { Quiz } from "@/types/Quiz";
@@ -6,6 +6,7 @@ import { fetchQuizById } from "@/services/quizzesService";
 import { ClipLoader } from "react-spinners";
 import { useCallback, useState } from "react";
 import { saveQuizResult } from "@/services/quizResultsService";
+import { paths } from "@/router/paths";
 
 export function SinglePageQuiz() {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +15,8 @@ export function SinglePageQuiz() {
   }
   const fetcher = useCallback(() => fetchQuizById(id), [id]);
   const { data, isLoading, error } = useFetch<Quiz>(fetcher);
+
+  const navigate = useNavigate();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -91,6 +94,9 @@ export function SinglePageQuiz() {
           </div>
           <button className={c.restartButton} onClick={restartQuiz}>
             Restart Quiz
+          </button>
+          <button className={c.homeButton} onClick={() => navigate(paths.home)}>
+            Quizzes Page
           </button>
         </div>
       </div>
