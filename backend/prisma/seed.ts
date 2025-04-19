@@ -416,7 +416,6 @@ async function main() {
       username: 'ivana',
       email: 'ivana@gmail.com',
       password: await hashPassword('ivana123'),
-      points: 120,
     },
   });
 
@@ -425,7 +424,6 @@ async function main() {
       username: 'marko',
       email: 'marko@gmail.com',
       password: await hashPassword('marko123'),
-      points: 60,
     },
   });
 
