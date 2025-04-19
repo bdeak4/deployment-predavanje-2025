@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, MinLength } from 'class-validator';
+import { IsOptional, IsString, IsUrl, MinLength } from 'class-validator';
 
 export class UpdateQuizDto {
   @IsString()
@@ -8,6 +8,7 @@ export class UpdateQuizDto {
   name: string;
 
   @IsOptional()
+  @IsUrl()
   @IsString()
   @ApiProperty({ example: 'https://yourImage.jpg' })
   imgUrl: string;

@@ -5,6 +5,7 @@ type InputFieldProps = {
   placeholder: string;
   onChange: (value: string) => void;
   value: string;
+  required?: boolean;
 };
 
 export function InputField({
@@ -13,6 +14,7 @@ export function InputField({
   placeholder,
   onChange,
   value,
+  required = true,
 }: InputFieldProps) {
   return (
     <div className={c.inputWrapper}>
@@ -23,7 +25,7 @@ export function InputField({
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
         value={value}
-        required
+        required={required}
       />
     </div>
   );

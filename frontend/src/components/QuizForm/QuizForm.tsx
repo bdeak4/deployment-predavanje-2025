@@ -13,10 +13,12 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { ClipLoader } from "react-spinners";
 import { createQuiz } from "@/services/quizzesService";
+import { isValidUrl } from "@/utils/isValidUrl";
 
 export const QuizForm = () => {
   const [showQuestionForm, setShowQuestionForm] = useState<boolean>(false);
   const [quizName, setQuizName] = useState<string>("");
+  const [imgUrl, setImgUrl] = useState<string>("");
   const [questions, setQuestions] = useState<AddQuestion[]>([]);
   const [categoryId, setCategoryId] = useState<string | undefined>("");
   const [error, setError] = useState<string>("");
@@ -35,10 +37,16 @@ export const QuizForm = () => {
       return;
     }
 
+    if (imgUrl && !isValidUrl(imgUrl)) {
+      toast.error("Please enter a valid image URL");
+      return;
+    }
+
     try {
       await createQuiz({
         name: quizName,
         categoryId: categoryId,
+        imgUrl: imgUrl || undefined,
         questions: questions,
       });
 
@@ -47,6 +55,7 @@ export const QuizForm = () => {
       setQuestions([]);
       setCategoryId("");
       setQuizName("");
+      setImgUrl("");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to create quiz"
@@ -72,6 +81,14 @@ export const QuizForm = () => {
           placeholder="Enter quiz name"
           onChange={setQuizName}
           value={quizName}
+        />
+        <InputField
+          label="Image URL (not required)"
+          type="text"
+          placeholder="https://your-img-png"
+          onChange={setImgUrl}
+          value={imgUrl}
+          required={false}
         />
         {categories && (
           <CategoryFilter

@@ -5,7 +5,6 @@ import {
   IsNotEmpty,
   IsString,
   IsUUID,
-  MinLength,
   ValidateNested,
 } from 'class-validator';
 import { UpdateQuizDto } from './update-quiz.dto';
