@@ -44,6 +44,9 @@ export const QuizForm = () => {
 
       toast.success("Successfully added quiz");
       setError("");
+      setQuestions([]);
+      setCategoryId("");
+      setQuizName("");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to create quiz"

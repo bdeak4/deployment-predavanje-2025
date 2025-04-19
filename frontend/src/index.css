@@ -45,7 +45,6 @@ h5 {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin: 0 auto;
   max-width: 700px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
   background-color: var(--white);
@@ -55,4 +54,13 @@ h5 {
 
 .errorMessage {
   color: red;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 1rem;
+  }
+  .headerPadding {
+    padding-top: 190px;
+  }
 }

@@ -34,7 +34,7 @@ export const UserStatsPage = ({ data }: UserStatsPageProps) => {
       ) : (
         <div className={c.quizCard}>
           {user.quizResults.map((result) => (
-            <QuizResultCard result={result} />
+            <QuizResultCard key={result.id} result={result} />
           ))}
         </div>
       )}

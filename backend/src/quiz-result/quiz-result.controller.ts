@@ -21,7 +21,7 @@ import { UserGuard } from 'src/auth/guard/user.guard';
 export class QuizResultController {
   constructor(private readonly quizResultService: QuizResultService) {}
 
-  @UseGuards(AdminGuard)
+  @UseGuards(UserGuard)
   @ApiOperation({ summary: 'Create new quiz-result' })
   @ApiBody({
     description: 'Quiz-result data to create a new quiz-result',

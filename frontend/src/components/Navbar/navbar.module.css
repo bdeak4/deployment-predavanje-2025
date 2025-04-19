@@ -12,6 +12,10 @@
   letter-spacing: 0.3px;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .searchAndAvatar {
   display: flex;
   align-items: center;
@@ -122,4 +126,31 @@ input {
 
 .sideMenu button:hover {
   color: var(--blue-hover);
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    padding-inline: 1rem;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .searchAndAvatar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .loggedIn {
+    flex-direction: row;
+  }
+
+  .authBtns {
+    flex-direction: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .authBtns button {
+    width: 50%;
+  }
 }

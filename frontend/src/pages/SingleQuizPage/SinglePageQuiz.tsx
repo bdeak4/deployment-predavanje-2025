@@ -92,12 +92,17 @@ export function SinglePageQuiz() {
               Your Score: {score}/{data.questions.length * 10}
             </h3>
           </div>
-          <button className={c.restartButton} onClick={restartQuiz}>
-            Restart Quiz
-          </button>
-          <button className={c.homeButton} onClick={() => navigate(paths.home)}>
-            Quizzes Page
-          </button>
+          <div className={c.buttonWrapper}>
+            <button className={c.restartButton} onClick={restartQuiz}>
+              Restart Quiz
+            </button>
+            <button
+              className={c.homeButton}
+              onClick={() => navigate(paths.home)}
+            >
+              Quizzes Page
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -68,6 +68,9 @@ export const AvatarMenu = () => {
           paper: {
             sx: {
               top: "74px",
+              "@media (max-width:768px)": {
+                top: "108px",
+              },
               height: "calc(100vh - 78px)",
               width: 250,
               backgroundColor: "var(--white-background)",

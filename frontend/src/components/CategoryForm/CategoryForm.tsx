@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InputField } from "../InputField/InputField";
 import c from "./categoryForm.module.css";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { createCategory } from "@/services/categoryService";
 import { AddButton } from "../AddButton/AddButton";
 
@@ -39,6 +39,7 @@ export const CategoryForm = () => {
         {error && <div className="errorMessage">{error}</div>}
 
         <AddButton />
+        <Toaster />
       </form>
     </div>
   );

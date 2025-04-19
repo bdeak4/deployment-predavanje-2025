@@ -35,10 +35,10 @@ export const Navbar = () => {
 
   return (
     <nav className={c.navigation}>
-      <div className={c.logo}>
+      <div className={c.logo} onClick={() => navigate(paths.home)}>
         <h3>Dump Quiz</h3>
       </div>
-      <div className={c.searchAndAvatar}>
+      <div className={`${c.searchAndAvatar} ${user?.role ? c.loggedIn : ""}`}>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
