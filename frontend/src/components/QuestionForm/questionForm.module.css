@@ -24,6 +24,11 @@
   border: 1px solid #ced8fc;
 }
 
+.trueFalseButtons {
+  display: flex;
+  gap: 8px;
+}
+
 .addOption {
   align-self: flex-start;
 }
