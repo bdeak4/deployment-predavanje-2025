@@ -59,7 +59,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo docker pull ghcr.io/bdeak4/deployment-predavanje-2025
+            sudo docker pull ghcr.io/bdeak4/deployment-predavanje-2025:main
             sudo docker stop deployment-predavanje-2025 || true
             sudo docker rm deployment-predavanje-2025 || true
             sudo docker run -d -p 3000:3000 --env-file .env --restart always --name deployment-predavanje-2025 ghcr.io/bdeak4/deployment-predavanje-2025:main
