@@ -1,4 +1,5 @@
 FROM node:20
+LABEL org.opencontainers.image.source https://github.com/bdeak4/deployment-predavanje-2025
 WORKDIR /app
 
 COPY ./package.json ./package.json
