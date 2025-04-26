@@ -40,3 +40,22 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo docker pull ghcr.io/bdeak4/deployment-predavanje-2025
+            sudo docker stop deployment-predavanje-2025 || true
+            sudo docker rm deployment-predavanje-2025 || true
+            sudo docker run -d -p 3000:3000 --env-file .env --restart always --name deployment-predavanje-2025 ghcr.io/bdeak4/deployment-predavanje-2025:main
